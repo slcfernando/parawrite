@@ -6,4 +6,43 @@
 @theme inline {
   --font-lora: Lora;
   --font-satisfy: Satisfy;
+
+  --color-mandalay-50: #fdfae9;
+  --color-mandalay-100: #faf3c7;
+  --color-mandalay-200: #f7e591;
+  --color-mandalay-300: #f2d052;
+  --color-mandalay-400: #ecb923;
+  --color-mandalay-500: #dca116;
+  --color-mandalay-600: #b1740f;
+  --color-mandalay-700: #985910;
+  --color-mandalay-800: #7e4715;
+  --color-mandalay-900: #6b3b18;
+  --color-mandalay-950: #3e1e0a;
+  --color-mandalay: var(--color-mandalay-600);
+
+  --color-grandis-50: #fff8eb;
+  --color-grandis-100: #ffebc6;
+  --color-grandis-200: #ffd07b;
+  --color-grandis-300: #ffb84a;
+  --color-grandis-400: #ff9e20;
+  --color-grandis-500: #f97907;
+  --color-grandis-600: #dd5502;
+  --color-grandis-700: #b73706;
+  --color-grandis-800: #942a0c;
+  --color-grandis-900: #7a230d;
+  --color-grandis-950: #460f02;
+  --color-grandis: var(--color-grandis-200);
+
+  --color-my-sin-50: #fffaeb;
+  --color-my-sin-100: #fef0c7;
+  --color-my-sin-200: #fedf89;
+  --color-my-sin-300: #fdc84c;
+  --color-my-sin-400: #fdb833;
+  --color-my-sin-500: #f79009;
+  --color-my-sin-600: #db6a04;
+  --color-my-sin-700: #b54808;
+  --color-my-sin-800: #93370d;
+  --color-my-sin-900: #792e0e;
+  --color-my-sin-950: #461502;
+  --color-my-sin: var(--color-my-sin-400);
 }
