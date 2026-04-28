@@ -7,3 +7,11 @@ bun.lockb
 
 # Miscellaneous
 /static/
+
+.DS_Store
+.svelte-kit
+build
+node_modules
+.env
+.env.*
+!.env.example
