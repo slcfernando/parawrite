@@ -7,4 +7,7 @@
 </script>
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
-{@render children()}
+
+<main class="bg-mandalay-900 p-24 min-h-screen font-lora">
+    {@render children()}
+</main>
