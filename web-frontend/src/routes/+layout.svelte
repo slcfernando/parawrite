@@ -8,6 +8,6 @@
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
 
-<main class="bg-mandalay-900 p-24 min-h-screen font-lora">
+<main class="min-h-screen bg-mandalay-900 p-24 font-lora">
     {@render children()}
 </main>
