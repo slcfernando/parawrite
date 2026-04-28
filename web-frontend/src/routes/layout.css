@@ -1,2 +1,9 @@
+@import url('$lib/fonts/Lora/font.css') layer(base);
+@import url('$lib/fonts/Satisfy/font.css') layer(base);
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
+
+@theme inline {
+  --font-lora: Lora;
+  --font-satisfy: Satisfy;
+}
