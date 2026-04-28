@@ -1,14 +1,28 @@
 {
-	"useTabs": true,
+	"useTabs": false,
+	"tabWidth": 4,
 	"singleQuote": true,
-	"trailingComma": "none",
+	"trailingComma": "all",
 	"printWidth": 100,
-	"plugins": ["prettier-plugin-svelte", "prettier-plugin-tailwindcss"],
+	"plugins": [
+		"prettier-plugin-svelte",
+		"prettier-plugin-tailwindcss"
+	],
 	"overrides": [
 		{
-			"files": "*.svelte",
+			"files": [
+				"**/*.yml",
+				"**/*.yaml"
+			],
 			"options": {
-				"parser": "svelte"
+				"tabWidth": 2
+			}
+		},
+		{
+			"files": "**/*.svelte",
+			"options": {
+				"parser": "svelte",
+				"svelteAllowShorthand": true
 			}
 		}
 	],
