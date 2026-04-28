@@ -6,9 +6,6 @@ import requests
 from bs4 import BeautifulSoup
 from pprint import pprint
 
-# TODO: Add ABS-CBN and GMA sitemaps
-RAPPLER_SITEMAP_INDEX = "https://www.rappler.com/sitemap_index.xml"
-
 # TODO: For now, this is focused on Rappler only
 def get_article_urls(sitemap_url: str, max_urls=10000) -> list[str]:
     print(f"Fetching sitemap: {sitemap_url}")
@@ -25,9 +22,15 @@ def get_article_urls(sitemap_url: str, max_urls=10000) -> list[str]:
             break
         url = loc.text
         if ("rappler-prod-01" not in url and
-            ".jpg" not in url and
-            ".png" not in url and
-            "go.rappler" not in url):
+            '.' != url[-4] and  # the 4th to last character shouldn't be dot, because then this isn't a news article
+            ".jpg" not in url.lower() and
+            ".png" not in url.lower() and
+            ".gif" not in url.lower() and
+            "go.rappler" not in url and
+            "r3-assets" not in url and
+            "r5-assets" not in url and
+            "static.rappler.com" not in url and
+            url != "https://www.rappler.com/latest/"):
             print(f"Found url: {url}")
             urls.append(url)
 
@@ -37,7 +40,7 @@ def get_article_urls(sitemap_url: str, max_urls=10000) -> list[str]:
 def scrape_article_text(article_url: str) -> dict | None:
     print(f"Scraping: {article_url}")
     
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
+    headers = {"User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0"}
 
     response = requests.get(article_url, headers=headers)
 
@@ -53,28 +56,48 @@ def scrape_article_text(article_url: str) -> dict | None:
     # Have to add the replace because some \xa0 characters are left out
     body = " ".join([p.text.replace(u'\xa0', u' ').strip() for p in body_paragraphs])
 
-    print(f"Done scraping: {url}")
+    print(f"Done scraping: {article_url}")
     output = {"title": title, "body": body}
     return output
 
-if __name__ == '__main__':
+def scrape_rappler_urls():
     urls = []
     urls.extend(get_article_urls("https://www.rappler.com/post-sitemap.xml"))
     # In Rappler, the sitemap goes up to post-sitemap380
-    # for i in range(2, 381):
-    for i in range(375, 381):
+    for i in range(2, 381):
         urls.extend(get_article_urls(f"https://www.rappler.com/post-sitemap{i}.xml"))
 
-    # Get 1,000 random URLs
-    random_urls = random.sample(urls, 20)
+    # Write all articles into a text file
+    with open("rappler_urls.txt", 'w', encoding="utf8") as rappler_urls:
+        rappler_urls.write('\n'.join(urls))
+
+def scrape_rappler_articles(n=1000):
+    urls = []
+    with open("rappler_urls.txt", 'r', encoding="utf-8") as rappler_urls:
+        while True:
+            url = rappler_urls.readline()
+            if not url:
+                break
+            urls.append(url)
+    
+    # Get n random URLs
+    random_urls = random.sample(urls, n)
     scraped = []
     for url in random_urls:
-        output = scrape_article_text(url)
+        output = scrape_article_text(url.strip())
         if output is not None:
             scraped.append(output)
-    pprint(scraped)
-
-    with open("scraped.json", 'w', encoding='utf8') as output_file:
-        output_file.write(json.dumps(scraped))
     
-    print("Wrote output into scraped.json")
+    return scraped
+
+if __name__ == '__main__':
+    # TODO: For now, only Rappler articles here
+
+    # Uncomment to get all available Rappler URLs
+    # scrape_rappler_urls()
+
+    # Change the value in the function to control how many randomly chosen articles will be scraped
+    scraped = scrape_rappler_articles(1000)
+    with open("rappler_articles.json", 'w', encoding='utf8') as output_file:
+        output_file.write(json.dumps({"scraped": scraped}))
+    print("Wrote output into rappler_articles.json")
