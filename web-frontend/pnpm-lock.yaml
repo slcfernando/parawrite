@@ -65,6 +65,9 @@ importers:
       svelte-check:
         specifier: ^4.4.6
         version: 4.4.6(picomatch@4.0.4)(svelte@5.55.5(@typescript-eslint/types@8.59.1))(typescript@6.0.3)
+      tailwind-csstree:
+        specifier: ^0.3.1
+        version: 0.3.1(@eslint/css@1.1.0)
       tailwindcss:
         specifier: ^4.2.2
         version: 4.2.4
@@ -1317,6 +1320,15 @@ packages:
     resolution: {integrity: sha512-2uCs/LZ9us+AktdzYJM8OcxQ8qnPS1kpaO7syGT/MgO+6Qr1Ybl+TqPq+97u7PHqmmMlye5ZkoyXONy5mjjAbw==}
     engines: {node: '>=18'}
 
+  tailwind-csstree@0.3.1:
+    resolution: {integrity: sha512-v147gLOR+E+9H4dNaP9rBeS/S/CTQJMRItlX9jLOXjdBGfSRauLwiz7LBCViaQmn6URXIlOdN6iMzSzOaeoUUw==}
+    engines: {node: '>=18.18'}
+    peerDependencies:
+      '@eslint/css': '>=1.0.0'
+    peerDependenciesMeta:
+      '@eslint/css':
+        optional: true
+
   tailwindcss@4.2.4:
     resolution: {integrity: sha512-HhKppgO81FQof5m6TEnuBWCZGgfRAWbaeOaGT00KOy/Pf/j6oUihdvBpA7ltCeAvZpFhW3j0PTclkxsd4IXYDA==}
 
@@ -2500,6 +2512,10 @@ snapshots:
       zimmerframe: 1.1.4
     transitivePeerDependencies:
       - '@typescript-eslint/types'
+
+  tailwind-csstree@0.3.1(@eslint/css@1.1.0):
+    optionalDependencies:
+      '@eslint/css': 1.1.0
 
   tailwindcss@4.2.4: {}
 
