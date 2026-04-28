@@ -8,10 +8,13 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write ."
+		"es:fix": "eslint --cache --fix .",
+		"fix": "pnpm fmt:fix && pnpm es:fix",
+		"fmt": "prettier --experimental-cli --cache-location .prettiercache --check .",
+		"fmt:fix": "prettier --experimental-cli --cache-location .prettiercache --write .",
+		"lint": "pnpm --workspace-root --parallel /^lint:/",
+		"lint:es": "eslint --cache .",
+		"lint:sv": "svelte-check --tsconfig ./tsconfig.json"
 	},
 	"devDependencies": {
 		"@bastidood/eslint-plugin-imsort": "^0.12.0",
